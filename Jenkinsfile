@@ -20,24 +20,4 @@ node {
         sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.110.175.253:/opt/apache-tomcat-9.0.98/webapps/"
      }
     }  
-     post {
-        success {
-            slackSend(
-                channel: '#devops-channel',
-                message: "Pipeline ${env.JOB_NAME} succeeded at ${env.BUILD_URL}"
-            )
-        }
-        failure {
-            slackSend(
-                channel: '#devops-channel',
-                message: "Pipeline ${env.JOB_NAME} failed at ${env.BUILD_URL}"
-            )
-        }
-        always {
-            slackSend(
-                channel: '#devops-channel',
-                message: "Pipeline ${env.JOB_NAME} completed. See details at ${env.BUILD_URL}"
-            )
-        }
-    }
 }
